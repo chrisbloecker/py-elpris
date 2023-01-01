@@ -29,7 +29,7 @@ def get_prices_today():
 
 def get_prices_tomorrow():
     """
-    Retrieves tomorrow's electricity prices from elbruk.nu.
+    Retrieves tomorrow's electricity prices from elbruk.se.
 
     Raises:
         ToDo: figure out which exceptions can be thrown

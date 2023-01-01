@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="py-elpris",
-    version="0.1.1",
+    version="0.1.2",
     author="Christopher Blöcker",
     author_email="mail@chrisbloecker.se",
-    description="A library to retrieve electricity prices from elen.nu",
+    description="A library to retrieve electricity prices from elbruk.se",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/chrisbloecker/py-elpris",
