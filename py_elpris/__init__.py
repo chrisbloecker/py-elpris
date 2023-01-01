@@ -3,12 +3,12 @@ import re
 from bs4 import BeautifulSoup
 
 
-url = "https://elen.nu"
+url = "https://www.elbruk.se"
 
 
 def get_prices_today():
     """
-    Retrieves today's electricity prices from elen.nu.
+    Retrieves today's electricity prices from elbruk.se.
 
     Raises:
         ToDo: figure out which exceptions can be thrown
@@ -17,8 +17,8 @@ def get_prices_today():
         A dictionary with areas as keys and prices as values.
     """
     soup   = BeautifulSoup(requests.get(url).text, "html.parser")
-    areas  = [ area.text for area in soup.find_all("div",  attrs = { "class" : "uppercase text-sm" }) ]
-    today  = [ t.text    for t    in soup.find_all("span", attrs = { "class" : "text-lg" }) ]
+    areas  = [ area.text for area in soup.find_all("span", attrs = { "class" : "info-box-text" }) ][:4]
+    today  = [ t.text    for t    in soup.find_all("span", attrs = { "class" : "info-box-number" }) ][:4]
 
     prices = { area : float(t.replace(",",".")) 
                  for (area, t) in zip(areas, today)
@@ -29,7 +29,7 @@ def get_prices_today():
 
 def get_prices_tomorrow():
     """
-    Retrieves tomorrow's electricity prices from elen.nu.
+    Retrieves tomorrow's electricity prices from elbruk.nu.
 
     Raises:
         ToDo: figure out which exceptions can be thrown
@@ -38,8 +38,8 @@ def get_prices_tomorrow():
         A dictionary with areas as keys and prices as values.
     """
     soup     = BeautifulSoup(requests.get(url).text, "html.parser")
-    areas    = [ area.text for area in soup.find_all("div", attrs = { "class" : "uppercase text-sm" }) ]
-    tomorrow = [ t.text    for t    in soup.find_all("div", attrs = { "class" : "text-xs" }) ]
+    areas    = [ area.text for area in soup.find_all("span", attrs = { "class" : "info-box-text" }) ][:4]
+    tomorrow = [ t.text    for t    in soup.find_all("span", attrs = { "class" : "progress-description" }) ][:4]
 
     prices = { area : None for area in areas}
     for (area, t) in zip(areas, tomorrow):
